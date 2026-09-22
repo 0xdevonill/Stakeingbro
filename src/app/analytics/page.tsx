@@ -11,7 +11,7 @@ export default function AnalyticsPage() {
   const featured = tokens.data?.[0];
   const chart = useTokenChart(featured?.address ?? "", "1M");
 
-  if (overview.isLoading || tokens.isLoading) return <TableSkeleton rows={8} />;
+  if (overview.isPending || tokens.isPending) return <TableSkeleton rows={8} />;
 
   const totalStaked = overview.data?.totalValueStaked ?? 0;
   const stakers = overview.data?.activeStakers ?? 0;

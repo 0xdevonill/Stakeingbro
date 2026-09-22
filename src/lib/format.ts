@@ -30,8 +30,9 @@ export function formatUsd(value: number, compact = true) {
 
 export function formatNumber(value: number, compact = true) {
   if (!Number.isFinite(value)) return "—";
+  if (value === 0) return "0";
   if (Math.abs(value) >= 1_000 && compact) return compactNumber.format(value);
-  if (Math.abs(value) < 0.0001 && value !== 0) return value.toExponential(2);
+  if (Math.abs(value) < 0.0001) return value.toExponential(2);
   if (Math.abs(value) < 1) return value.toPrecision(4);
   return fullNumber.format(value);
 }
@@ -57,6 +58,7 @@ export function formatDate(value: string | number | Date) {
     month: "short",
     day: "numeric",
     year: "numeric",
+    timeZone: "UTC",
   }).format(new Date(value));
 }
 
@@ -66,11 +68,12 @@ export function formatDateTime(value: string | number | Date) {
     day: "numeric",
     hour: "numeric",
     minute: "2-digit",
+    timeZone: "UTC",
   }).format(new Date(value));
 }
 
 export function timeAgo(value: string | number | Date) {
-  const delta = Date.now() - new Date(value).getTime();
+  const delta = Date.parse("2026-09-22T12:00:00.000Z") - new Date(value).getTime();
   const minutes = Math.max(0, Math.round(delta / 60_000));
   if (minutes < 1) return "just now";
   if (minutes < 60) return `${minutes}m ago`;

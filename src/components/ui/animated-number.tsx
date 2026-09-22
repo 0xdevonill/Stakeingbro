@@ -11,7 +11,7 @@ export function AnimatedNumber({
   format: (value: number) => string;
   duration?: number;
 }) {
-  const [shown, setShown] = useState(0);
+  const [shown, setShown] = useState(value);
 
   useEffect(() => {
     let frame = 0;
@@ -28,5 +28,9 @@ export function AnimatedNumber({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, duration]);
 
-  return <span className="tabular-nums">{format(shown)}</span>;
+  return (
+    <span className="tabular-nums" suppressHydrationWarning>
+      {format(shown)}
+    </span>
+  );
 }

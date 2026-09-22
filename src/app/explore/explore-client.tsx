@@ -41,7 +41,7 @@ export default function ExplorePage() {
   );
   const [view, setView] = useState<"cards" | "table">("cards");
   const query = useMemo(() => ({ search, sort, filter }), [search, sort, filter]);
-  const { data, isLoading } = useTokens(query);
+  const { data, isPending } = useTokens(query);
 
   return (
     <div className="space-y-6">
@@ -87,7 +87,7 @@ export default function ExplorePage() {
           </button>
         </div>
       </div>
-      {isLoading ? (
+      {isPending ? (
         <div className="grid gap-4 md:grid-cols-2">
           <TokenCardSkeleton />
           <TokenCardSkeleton />

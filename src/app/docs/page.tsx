@@ -24,7 +24,7 @@ const sections = [
   {
     id: "rewards",
     title: "How rewards work",
-    body: "The staking contract calculates rewards from amount staked, duration, reward emission rate, and pool configuration. APR and reward rates can change. StakeBro does not imply that rewards are guaranteed profits.",
+    body: "The staking contract calculates rewards from amount staked, duration, reward emission rate, and pool configuration. APR and reward rates can change. Rewards are not guaranteed profits.",
   },
   {
     id: "claiming",

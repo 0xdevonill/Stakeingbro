@@ -23,14 +23,14 @@ import type { ChartRange } from "@/types";
 
 export default function TokenPage({ params }: { params: Promise<{ address: string }> }) {
   const { address } = use(params);
-  const { data: token, isLoading, isError } = useToken(address);
+  const { data: token, isPending, isError } = useToken(address);
   const [range, setRange] = useState<ChartRange>("1D");
   const chart = useTokenChart(address, range);
   const holders = useHolders(address);
   const activity = useActivity(address);
   const watchlist = useWatchlist();
 
-  if (isLoading) {
+  if (isPending) {
     return (
       <div className="space-y-4">
         <TokenCardSkeleton />
@@ -103,7 +103,7 @@ export default function TokenPage({ params }: { params: Promise<{ address: strin
       </section>
 
       <div className="grid gap-6 xl:grid-cols-[1.4fr_0.8fr]" id="trade">
-        {chart.isLoading ? <ChartSkeleton /> : <TokenChart points={chart.data ?? []} range={range} onRange={setRange} />}
+        {chart.isPending ? <ChartSkeleton /> : <TokenChart points={chart.data ?? []} range={range} onRange={setRange} />}
         <TradeWidget token={token} />
       </div>
 
@@ -123,12 +123,12 @@ export default function TokenPage({ params }: { params: Promise<{ address: strin
       <section className="card p-5">
         <h2 className="font-display text-2xl">Holders</h2>
         <p className="mt-1 text-sm text-muted">Public balances only. Click a wallet to view on-chain activity.</p>
-        <div className="mt-4">{holders.isLoading ? <TableSkeleton /> : <HoldersTable rows={holders.data ?? []} symbol={token.symbol} tokenAddress={token.address} />}</div>
+        <div className="mt-4">{holders.isPending ? <TableSkeleton /> : <HoldersTable rows={holders.data ?? []} symbol={token.symbol} tokenAddress={token.address} />}</div>
       </section>
 
       <section className="card p-5">
         <h2 className="font-display text-2xl">Activity</h2>
-        <div className="mt-4">{activity.isLoading ? <TableSkeleton /> : <ActivityFeed items={activity.data ?? []} />}</div>
+        <div className="mt-4">{activity.isPending ? <TableSkeleton /> : <ActivityFeed items={activity.data ?? []} />}</div>
       </section>
 
       <section className="card p-5">

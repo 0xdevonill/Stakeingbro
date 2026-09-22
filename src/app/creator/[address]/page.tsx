@@ -10,9 +10,9 @@ import { formatNumber, formatUsd } from "@/lib/format";
 
 export default function CreatorPage({ params }: { params: Promise<{ address: string }> }) {
   const { address } = use(params);
-  const { data, isLoading } = useCreator(address);
+  const { data, isPending } = useCreator(address);
 
-  if (isLoading) return <p className="text-muted">Loading creator…</p>;
+  if (isPending) return <p className="text-muted">Loading creator…</p>;
   if (!data) {
     return (
       <EmptyState

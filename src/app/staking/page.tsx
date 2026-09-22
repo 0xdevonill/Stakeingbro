@@ -35,7 +35,7 @@ export default function StakingPage() {
       {featured ? <StakingPanel token={featured} /> : <TokenCardSkeleton />}
       <section>
         <h2 className="font-display mb-4 text-2xl">Staking pools</h2>
-        {tokens.isLoading ? (
+        {tokens.isPending ? (
           <div className="grid gap-4 md:grid-cols-3"><TokenCardSkeleton /><TokenCardSkeleton /><TokenCardSkeleton /></div>
         ) : !tokens.data?.length ? (
           <EmptyState title="No staking pools" body="When staking contracts are indexed, available pools will appear here." />

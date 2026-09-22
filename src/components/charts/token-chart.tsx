@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { formatNumber, formatUsd } from "@/lib/format";
+import { formatDateTime, formatNumber, formatUsd } from "@/lib/format";
 import { cn } from "@/lib/utils";
 import type { CandlePoint, ChartRange } from "@/types";
 
@@ -92,7 +92,7 @@ export function TokenChart({
         ) : null}
       </svg>
       <div className="mt-2 flex justify-between text-[11px] text-muted">
-        <span>{first ? new Date(first.time).toLocaleString() : ""}</span>
+        <span>{first ? formatDateTime(first.time) : ""}</span>
         <span>Volume {last ? formatNumber(last.volume) : "—"}</span>
       </div>
     </div>

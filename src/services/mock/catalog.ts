@@ -20,10 +20,10 @@ function addressFromSeed(seed: string): `0x${string}` {
   return `0x${(hex + hex2 + hex3 + hex4 + hex5).slice(0, 40)}`;
 }
 
-const now = Date.now();
+const REFERENCE_NOW = Date.parse("2026-09-22T12:00:00.000Z");
 
 function daysAgo(days: number, hours = 0) {
-  return new Date(now - days * 86_400_000 - hours * 3_600_000).toISOString();
+  return new Date(REFERENCE_NOW - days * 86_400_000 - hours * 3_600_000).toISOString();
 }
 
 const fixtureNote =
@@ -469,7 +469,7 @@ export function getMockChart(address: string, range: ChartRange): CandlePoint[] 
     const volume = token.volume24h * (0.01 + rand() * 0.04);
     price = close;
     points.push({
-      time: now - (count - i) * interval,
+      time: REFERENCE_NOW - (count - i) * interval,
       open,
       high,
       low,
@@ -557,7 +557,7 @@ export function getMockPositions(): StakingPosition[] {
       apr: aura.pools[1].apr,
       dailyReward: 68.49,
       lock: 30,
-      unlockAt: new Date(now + 11 * 86_400_000).toISOString(),
+      unlockAt: new Date(REFERENCE_NOW + 11 * 86_400_000).toISOString(),
       rewardRatePerSecond: 0.0021,
     },
     {

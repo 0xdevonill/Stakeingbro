@@ -20,31 +20,31 @@ export function Header() {
         <Link href="/" className="shrink-0" aria-label="StakeBro home">
           <StakeBroLogo />
         </Link>
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "rounded-full px-3 py-2 text-sm text-muted transition hover:text-foreground",
+                "whitespace-nowrap rounded-full px-3 py-2 text-sm text-muted transition hover:text-foreground",
                 pathname === item.href && "bg-white/5 text-foreground",
               )}
             >
-              {item.label}
+              {item.label === "Documentation" ? "Docs" : item.label}
             </Link>
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2">
-          <div className="hidden lg:block">
+          <div className="hidden xl:block">
             <SearchBox />
           </div>
-          <div className="lg:hidden">
+          <div className="xl:hidden">
             <SearchBox compact />
           </div>
           <NetworkSelector />
           <ConnectWallet />
           <button
-            className="glass flex h-11 w-11 items-center justify-center rounded-full lg:hidden"
+            className="glass flex h-11 w-11 items-center justify-center rounded-full xl:hidden"
             onClick={() => setOpen((value) => !value)}
             aria-label="Open menu"
           >
@@ -53,7 +53,7 @@ export function Header() {
         </div>
       </div>
       {open ? (
-        <div className="border-t border-border bg-background px-4 py-3 lg:hidden">
+        <div className="border-t border-border bg-background px-4 py-3 xl:hidden">
           {navItems.map((item) => (
             <Link
               key={item.href}

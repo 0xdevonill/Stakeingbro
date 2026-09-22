@@ -19,7 +19,7 @@ export default function LeaderboardPage() {
   const { positions } = useSimulation();
   const topHolders = tokens.data?.[0] ? getMockHolders(tokens.data[0].address) : [];
 
-  if (tokens.isLoading) return <TableSkeleton rows={8} />;
+  if (tokens.isPending) return <TableSkeleton rows={8} />;
 
   return (
     <div className="space-y-8">

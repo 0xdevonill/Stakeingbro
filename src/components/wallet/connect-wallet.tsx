@@ -92,7 +92,7 @@ export function ConnectWallet() {
 
   return (
     <>
-      <Button size="sm" onClick={() => setOpen(true)}>
+      <Button size="sm" onClick={() => setOpen(true)} className="whitespace-nowrap">
         <Wallet size={16} /> Connect Wallet
       </Button>
       <Modal
@@ -126,12 +126,13 @@ export function NetworkSelector() {
   const { isConnected } = useAccount();
   const [open, setOpen] = useState(false);
   const current = [robinhoodChain, robinhoodTestnet].find((chain) => chain.id === chainId) ?? configuredChain;
+  const label = configuredChain.name.replace(" Chain", "");
 
   return (
     <div className="relative hidden md:block">
       <button onClick={() => setOpen((value) => !value)} className="glass flex h-11 items-center gap-2 rounded-full px-3 text-sm">
         <span className="h-2 w-2 rounded-full bg-accent" />
-        {current.name.replace(" Chain", "")}
+        {label}
         <ChevronDown size={14} className="text-muted" />
       </button>
       {open ? (

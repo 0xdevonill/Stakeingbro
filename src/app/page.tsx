@@ -50,7 +50,7 @@ export default function HomePage() {
           <ol className="relative mt-4 space-y-3">
             {["Discover", "Buy", "Hold", "Stake", "Earn", "Claim", "Compound"].map((step, index) => (
               <li key={step} className="flex items-center gap-3 text-sm">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/5 font-mono text-xs text-accent">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/5 font-mono text-xs text-accent">
                   {index + 1}
                 </span>
                 {step}
@@ -73,12 +73,12 @@ export default function HomePage() {
 
       <section>
         <SectionHead title="Trending tokens" href="/explore?filter=trending" />
-        <TokenGrid tokens={trending.data?.slice(0, 3)} loading={trending.isLoading} />
+        <TokenGrid tokens={trending.data?.slice(0, 3)} loading={trending.isPending} />
       </section>
 
       <section>
         <SectionHead title="New token launches" href="/explore?sort=newest" />
-        <TokenGrid tokens={newest.data?.slice(0, 3)} loading={newest.isLoading} />
+        <TokenGrid tokens={newest.data?.slice(0, 3)} loading={newest.isPending} />
       </section>
 
       <section>
@@ -197,9 +197,12 @@ function TokenGrid({ tokens, loading }: { tokens?: ReturnType<typeof useTokens>[
       </div>
     );
   }
+  if (!tokens?.length) {
+    return <p className="text-sm text-muted">No tokens in this list yet.</p>;
+  }
   return (
     <div className="grid gap-4 md:grid-cols-3">
-      {tokens?.map((token) => (
+      {tokens.map((token) => (
         <TokenCard key={token.address} token={token} />
       ))}
     </div>
